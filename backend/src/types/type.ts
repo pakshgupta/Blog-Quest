@@ -1,4 +1,4 @@
-import { Types, Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 export type TUser = {
   _id?: string;
@@ -23,7 +23,7 @@ export type TPayload = {
   email: string;
 };
 
-interface LinkPreview {
+export interface LinkPreview {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string[];
