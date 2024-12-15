@@ -43,6 +43,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       default: "1 min",
     },
+    isPublished: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

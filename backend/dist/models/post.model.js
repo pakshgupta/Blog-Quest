@@ -39,6 +39,10 @@ const postSchema = new mongoose.Schema({
         type: String,
         default: "1 min",
     },
+    isPublished: {
+        type: Boolean,
+        default: false,
+    },
 }, { timestamps: true });
 postSchema.index({ owner: 1, createdAt: -1 });
 export const Post = mongoose.model("Post", postSchema);

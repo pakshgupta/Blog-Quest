@@ -38,6 +38,7 @@ export interface IPost extends Document {
   linkPreview?: LinkPreview[];
   owner: Types.ObjectId;
   readingTime?: string;
+  isPublished?: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
