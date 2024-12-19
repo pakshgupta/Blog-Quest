@@ -169,8 +169,10 @@ export const searchPostsController = asyncHandler(async (req, res) => {
   }
 
   const [posts, totalPosts] = await Promise.all([
-    Post.find({ baseQuery, isPublished: true }).skip(skip).limit(postsPerPage),
-    Post.countDocuments({ baseQuery, isPublished: true }),
+    Post.find({ ...baseQuery, isPublished: true })
+      .skip(skip)
+      .limit(postsPerPage),
+    Post.countDocuments({ ...baseQuery, isPublished: true }),
   ]);
 
   if (!posts.length) {

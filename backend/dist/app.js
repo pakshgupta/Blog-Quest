@@ -10,7 +10,9 @@ app.use(cookieParser());
 app.get("/", (_, res) => {
     res.send("Api is working with /api/v1");
 });
+import CommentRouter from "./routes/comment.route.js";
 import PostRouter from "./routes/post.route.js";
 import UserRouter from "./routes/user.route.js";
 app.use("/api/v1/user/", UserRouter);
 app.use("/api/v1/post/", PostRouter);
+app.use("/api/v1/comment/", CommentRouter);
