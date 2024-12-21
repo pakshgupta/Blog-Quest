@@ -15,8 +15,10 @@ app.get("/", (_, res) => {
 });
 
 import CommentRouter from "./routes/comment.route.js";
+import LikeRouter from "./routes/likes.route.js";
 import PostRouter from "./routes/post.route.js";
 import UserRouter from "./routes/user.route.js";
 app.use("/api/v1/user/", UserRouter);
 app.use("/api/v1/post/", PostRouter);
 app.use("/api/v1/comment/", CommentRouter);
+app.use("/api/v1/likes/", LikeRouter);
