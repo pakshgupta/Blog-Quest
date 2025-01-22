@@ -4,9 +4,9 @@ import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import UserProfileDropdown from "./UserProfileDropdown/UserProfileDropdown";
 const Navbar = () => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
   return (
-    <div className="flex items-center justify-between px-6 py-4 shadow-md shadow-gray-200 h-20 border-solid">
+    <div className="flex items-center justify-between h-20 px-6 py-4 border-solid shadow-md shadow-gray-200">
       {/* Logo and Search Section */}
       {user ? (
         <>
@@ -16,16 +16,16 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search"
-                className="pl-10 pr-4 py-2 bg-gray-100 text-black rounded-full outline-none placeholder-gray-500"
+                className="py-2 pl-10 pr-4 text-black placeholder-gray-500 bg-gray-100 rounded-full outline-none"
               />
-              <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+              <span className="absolute text-gray-500 transform -translate-y-1/2 left-3 top-1/2">
                 <CiSearch />
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-6">
-            <button className="px-4 py-2  text-md font-medium flex items-center gap-1">
+            <button className="flex items-center gap-1 px-4 py-2 font-medium text-md">
               {" "}
               <span>
                 <FiEdit />
@@ -36,7 +36,7 @@ const Navbar = () => {
           </div>
         </>
       ) : (
-        <div className="flex items-center justify-between px-6 py-4 h-20 border-b border-gray-200">
+        <div className="flex items-center justify-between w-full h-20 px-6 py-4 border-b border-gray-200">
           {/* Left Section: Medium Logo */}
           <div>
             <span className="text-2xl font-semibold cursor-pointer">
@@ -48,13 +48,13 @@ const Navbar = () => {
           <div className="flex items-center space-x-6">
             <Link
               to="/user/signin"
-              className="text-md font-medium text-gray-700 hover:text-gray-900"
+              className="font-medium text-gray-700 text-md hover:text-gray-900"
             >
               Sign in
             </Link>
             <Link
               to="/user/signup"
-              className="text-md font-medium text-white bg-black hover:bg-gray-800 px-4 py-2 rounded-md"
+              className="px-4 py-2 font-medium text-white bg-black rounded-md text-md hover:bg-gray-800"
             >
               Get Started
             </Link>
