@@ -1,10 +1,11 @@
-import { useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import UserProfileDropdown from "./UserProfileDropdown/UserProfileDropdown";
-const Navbar = () => {
-  const [user, setUser] = useState(true);
+interface User {
+  user: boolean;
+}
+const Navbar = ({ user }: User) => {
   return (
     <div className="flex items-center justify-between h-20 px-6 py-4 border-solid shadow-md shadow-gray-200">
       {/* Logo and Search Section */}
