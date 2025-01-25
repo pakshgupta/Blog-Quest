@@ -14,7 +14,7 @@ import Status from "./pages/Status";
 import Write from "./pages/Write";
 
 const App = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   return (
     <Router>
       <Navbar user={user} />

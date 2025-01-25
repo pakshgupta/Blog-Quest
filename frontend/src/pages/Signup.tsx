@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const Signup = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+    <div className="flex items-center justify-center min-h-screen bg-yellow-500 bg-gradient-to-b from-white/30 via-white/50 to-white/80">
+      <div className="p-8 bg-white rounded-lg shadow-lg w-96">
+        <h2 className="mb-6 text-2xl font-semibold text-center text-gray-800">
           Sign Up
         </h2>
 
@@ -92,18 +92,18 @@ const Signup = () => {
           <div>
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-200"
+              className="w-full py-2 text-white transition duration-200 bg-indigo-600 rounded-md hover:bg-indigo-700"
             >
               Sign Up
             </button>
           </div>
         </form>
 
-        <p className="mt-4 text-center text-sm text-gray-600">
+        <p className="mt-4 text-sm text-center text-gray-600">
           Already have an account?{" "}
           <Link
             to="/user/signin"
-            className="text-indigo-600 hover:text-indigo-700 font-medium"
+            className="font-medium text-indigo-600 hover:text-indigo-700"
           >
             Signin
           </Link>

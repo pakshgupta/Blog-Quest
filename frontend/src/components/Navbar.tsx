@@ -7,7 +7,13 @@ interface User {
 }
 const Navbar = ({ user }: User) => {
   return (
-    <div className="flex items-center justify-between h-20 px-6 py-4 border-solid shadow-md shadow-gray-200">
+    <div
+      className={
+        user
+          ? `flex items-center justify-between h-20 px-6 py-4 border-solid shadow-md shadow-gray-200`
+          : `flex items-center justify-between h-20 px-6 py-4 border-solid shadow-md shadow-gray-200 bg-yellow-500 bg-gradient-to-b from-white/30 via-white/50 to-white/80 `
+      }
+    >
       {/* Logo and Search Section */}
       {user ? (
         <>
@@ -37,7 +43,7 @@ const Navbar = ({ user }: User) => {
           </div>
         </>
       ) : (
-        <div className="flex items-center justify-between w-full h-20 px-6 py-4 border-b border-gray-200">
+        <div className="flex items-center justify-between w-full h-20 px-6 py-4 border-b border-gray-200 ">
           {/* Left Section: Medium Logo */}
           <div>
             <span className="text-2xl font-semibold cursor-pointer">
