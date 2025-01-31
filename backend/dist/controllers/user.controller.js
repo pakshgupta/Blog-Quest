@@ -65,8 +65,9 @@ export const signinController = asyncHandler(async (req, res) => {
         throw new ApiError(500, "Internal server error while fetching user details");
     }
     const options = {
-        httpOnly: true,
-        secure: true,
+        httpOnly: true, // ✅ Prevents client-side access
+        secure: process.env.NODE_ENV === "production", // ✅ Use secure cookies only in production
+        sameSite: "lax",
     };
     return res
         .status(200)

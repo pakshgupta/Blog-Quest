@@ -1,4 +1,3 @@
-import { access } from "fs";
 import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
@@ -83,8 +82,9 @@ export const signinController = asyncHandler(async (req, res) => {
     );
   }
   const options = {
-    httpOnly: true,
-    secure: true,
+    httpOnly: true, // ✅ Prevents client-side access
+    secure: process.env.NODE_ENV === "production", // ✅ Use secure cookies only in production
+    sameSite: "lax" as "lax" | "strict" | "none",
   };
   return res
     .status(200)
