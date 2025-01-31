@@ -1,11 +1,11 @@
 import { CiSearch } from "react-icons/ci";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../app/hook";
 import UserProfileDropdown from "./UserProfileDropdown/UserProfileDropdown";
-interface User {
-  user: boolean;
-}
-const Navbar = ({ user }: User) => {
+
+const Navbar = () => {
+  const { user } = useAppSelector((state) => state.userReducer);
   return (
     <div
       className={

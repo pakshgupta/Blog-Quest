@@ -1,6 +1,38 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useRegisterMutation } from "../app/api/userAPi";
+import { useAppDispatcher } from "../app/hook";
+import { userExist } from "../features/userSlice";
+import { User } from "../types";
 
 const Signup = () => {
+  const [register] = useRegisterMutation();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [gender, setGender] = useState("");
+  const [dob, setDob] = useState("");
+  const dispatch = useAppDispatcher();
+  const navigate = useNavigate();
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    try {
+      const result = await register({
+        name,
+        email,
+        password,
+        gender,
+        dob,
+      });
+      if (result?.data?.success) {
+        dispatch(userExist(result.data as User));
+        localStorage.setItem("user", JSON.stringify(result.data));
+        navigate("/user/signin");
+      }
+    } catch (error) {
+      console.error("Signup failed", error);
+    }
+  };
   return (
     <div className="flex items-center justify-center min-h-screen bg-yellow-500 bg-gradient-to-b from-white/30 via-white/50 to-white/80">
       <div className="p-8 bg-white rounded-lg shadow-lg w-96">
@@ -19,6 +51,8 @@ const Signup = () => {
             <input
               type="text"
               id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="Enter your Name"
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             />
@@ -34,6 +68,8 @@ const Signup = () => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             />
@@ -49,6 +85,8 @@ const Signup = () => {
             <input
               type="password"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             />
@@ -63,9 +101,11 @@ const Signup = () => {
             </label>
             <select
               id="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Select your gender
               </option>
               <option value="male">Male</option>
@@ -84,6 +124,8 @@ const Signup = () => {
             <input
               type="date"
               id="dob"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
               placeholder="Enter your Date of Birth"
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
             />
@@ -92,6 +134,7 @@ const Signup = () => {
           <div>
             <button
               type="submit"
+              onClick={(e) => handleClick(e)}
               className="w-full py-2 text-white transition duration-200 bg-indigo-600 rounded-md hover:bg-indigo-700"
             >
               Sign Up

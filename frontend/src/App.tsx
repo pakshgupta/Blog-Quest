@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { useAppDispatcher, useAppSelector } from "./app/hook";
 import Navbar from "./components/Navbar";
 import { CommentToggleProvider } from "./contexts/CommentToggleProvider";
+import { userExist } from "./features/userSlice";
 import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
@@ -14,10 +16,15 @@ import Status from "./pages/Status";
 import Write from "./pages/Write";
 
 const App = () => {
-  const [user, setUser] = useState(false);
+  const { user, loading } = useAppSelector((state) => state.userReducer);
+  const dispatch = useAppDispatcher();
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) dispatch(userExist(JSON.parse(storedUser)));
+  }, [dispatch]);
   return (
     <Router>
-      <Navbar user={user} />
+      <Navbar />
       <Routes>
         <Route path="/" element={user ? <Home /> : <LandingPage />} />
         <Route path="/post/create-post/" element={<Write />} />
