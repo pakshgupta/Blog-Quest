@@ -5,7 +5,7 @@ import { useAppSelector } from "../app/hook";
 import UserProfileDropdown from "./UserProfileDropdown/UserProfileDropdown";
 
 const Navbar = () => {
-  const { user } = useAppSelector((state) => state.userReducer);
+  const { user } = useAppSelector((state: any) => state.userReducer);
   return (
     <div
       className={

@@ -1,14 +1,30 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAllProductsQuery } from "../app/api/postAPI";
+import { useAppSelector } from "../app/hook";
 import PostCard from "../components/PostCard";
 
 const Home = () => {
+  const { data, refetch } = useAllProductsQuery();
+  const { user } = useAppSelector((state) => state.userReducer);
+  useEffect(() => {
+    if (user) {
+      refetch();
+    }
+  }, [user, refetch]);
+  console.log(data?.data.posts);
   return (
     <div className="flex justify-between p-5">
       <div>
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
+        {data?.data.posts?.map((post) => (
+          <Link to={`/post/${post._id}`}>
+            <PostCard
+              title={post.title}
+              description={post.description}
+              id={post._id}
+            />
+          </Link>
+        ))}
       </div>
 
       <div className="px-5 text-center w-[400px]">

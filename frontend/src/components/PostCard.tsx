@@ -1,15 +1,20 @@
 import { CiCircleMinus } from "react-icons/ci";
 import { MdOutlineBookmarkAdd } from "react-icons/md";
 
-const PostCard = () => {
+interface PostCardProps {
+  title: string;
+  description?: string;
+  id?: string;
+}
+const PostCard: React.FC<PostCardProps> = ({ title, description, id }) => {
   return (
     <div className="flex flex-col max-w-3xl gap-4 p-6 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg">
       <p className="font-semibold text-gray-700">Name</p>
       <div className="flex gap-6">
         {/* Text Section */}
         <div className="flex flex-col w-full">
-          <h3 className="text-2xl font-bold text-gray-800">Title</h3>
-          <p className="mt-2 text-lg text-gray-600">Description</p>
+          <h3 className="text-2xl font-bold text-gray-800">{title}</h3>
+          <p className="mt-2 text-lg text-gray-600">{description}</p>
 
           {/* Footer */}
           <div className="flex justify-between mt-4 text-sm text-gray-500">

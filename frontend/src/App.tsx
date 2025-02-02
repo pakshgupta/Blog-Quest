@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { useAppDispatcher, useAppSelector } from "./app/hook";
 import Navbar from "./components/Navbar";
@@ -16,12 +16,23 @@ import Status from "./pages/Status";
 import Write from "./pages/Write";
 
 const App = () => {
-  const { user, loading } = useAppSelector((state) => state.userReducer);
+  const { user, loading: userLoading } = useAppSelector(
+    (state) => state.userReducer
+  );
   const dispatch = useAppDispatcher();
+
+  const [isLoading, setIsLoading] = useState(true); // Add local loading state
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) dispatch(userExist(JSON.parse(storedUser)));
+    setIsLoading(false); // Stop loading once user check is complete
   }, [dispatch]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Show a loading spinner or message
+  }
+
   return (
     <Router>
       <Navbar />
@@ -48,4 +59,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default React.memo(App); // Memoize the App component to prevent unnecessary re-renders
